@@ -6,7 +6,7 @@
 #    By: pjang <student.42seoul.kr>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/23 03:49:53 by pjang             #+#    #+#              #
-#    Updated: 2022/10/10 17:40:58 by pjang            ###   ########.fr        #
+#    Updated: 2022/10/10 19:33:35 by pjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,23 +31,35 @@ SRCS	= 	./src/ft_mlx_img.c \
 			./src/move.c \
 			./src/put_error.c 
 
-OBJS	= $(SRCS:.c=.o)
-RM		= rm -f
+B_SRCS	= 	./bonus/ft_mlx_img_bonus.c \
+			./bonus/game_clear_bonus.c \
+			./bonus/game_fail_bonus.c \
+			./bonus/game_close_bonus.c \
+			./bonus/get_linelen_bonus.c \
+			./bonus/get_map_bonus.c \
+			./bonus/get_player_position_bonus.c \
+			./bonus/inits_bonus.c \
+			./bonus/keypress_bonus.c \
+			./bonus/main_bonus.c \
+			./bonus/map_check_bonus.c \
+			./bonus/map_regen_bonus.c \
+			./bonus/move_bonus.c \
+			./bonus/put_error_bonus.c 
 
-BONUS	= so_long_bonus
+OBJS	= $(SRCS:.c=.o)
+B_OBJS	= $(B_SRCS:.c=.o)
+
+BONUS	= $(NAME)
 
 ifdef WITH_BONUS
-all : $(MLX) $(LFT) $(BONUS)
+OBJS_FILES	= $(B_OBJS)
 else
-all : $(MLX) $(LFT) $(NAME)
+OBJS_FILES	= $(OBJS)
 endif
 
-$(BONUS) :
-	@make -s all -C bonus
-	$(RM) $(NAME)
-	@cp bonus/$@ $(NAME)
+all : $(MLX) $(LFT) $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS_FILES)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBC)
 
 $(MLX) : 
@@ -67,15 +79,14 @@ bonus :
 clean :
 	@make -s $@ -C mlx
 	@make -s $@ -C libft
-	@make -s $@ -C bonus
-	$(RM) $(OBJS)
+	@rm -f $(OBJS)
+	@rm -f $(B_OBJS)
 	@echo "Object files removed."
 
 fclean : clean
 	@make -s $@ -C libft
 	@make -s $@ -C mlx
-	@make -s $@ -C bonus
-	$(RM) $(NAME)
+	@rm -f $(NAME)
 	@echo "Executable file removed."
 
 re : fclean all
