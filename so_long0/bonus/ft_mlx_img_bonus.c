@@ -6,15 +6,29 @@
 /*   By: pjang <student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 16:43:30 by pjang             #+#    #+#             */
-/*   Updated: 2022/10/07 05:10:05 by pjang            ###   ########.fr       */
+/*   Updated: 2022/10/10 17:43:31 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long_bonus.h"
 
-void	mpitw_b(t_mapb *map, t_playerb *player, t_vars *vars, t_point point)
+void	player_put(t_mapb *map, t_playerb *player, t_varsb *vars)
 {
-	mlx_put_image_to_window(vars->mlx, vars->win, \
+	if (player->move_flag)
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, \
+			map->img_play.img, player->pixel_x * 4, player->pixel_y * 4);
+	}
+	else
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, \
+			map->img_play.img, player->x * 64, player->y * 64);
+	}
+}
+
+void	mpitw_b(t_mapb *map, t_playerb *player, t_varsb *vars, t_point point)
+{
+	mlx_put_image_to_window(vars->mlx, vars->win,
 		map->img_base.img, point.x * 64, point.y * 64);
 	if (point.map_c == '1')
 	{
@@ -31,11 +45,15 @@ void	mpitw_b(t_mapb *map, t_playerb *player, t_vars *vars, t_point point)
 		mlx_put_image_to_window(vars->mlx, vars->win, \
 			map->img_esc.img, point.x * 64, point.y * 64);
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, \
-		map->img_play.img, player->pixel_x * 4, player->pixel_y * 4);
+	else if (point.map_c == 'V')
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, \
+			map->img_vil.img, point.x * 64, point.y * 64);
+	}
+	player_put(map, player, vars);
 }
 
-void	img_to_window_b(t_mapb *map, t_playerb *player, t_vars *vars)
+void	img_to_window_b(t_mapb *map, t_playerb *player, t_varsb *vars)
 {
 	t_point	point;
 	t_list	*temp;
@@ -55,7 +73,7 @@ void	img_to_window_b(t_mapb *map, t_playerb *player, t_vars *vars)
 	}
 }
 
-void	ft_mlx_img(t_mapb *map, t_playerb *player, t_vars *vars)
+void	ft_mlx_img(t_mapb *map, t_playerb *player, t_varsb *vars)
 {
 	char	col[30];
 
@@ -70,6 +88,8 @@ void	ft_mlx_img(t_mapb *map, t_playerb *player, t_vars *vars)
 	"texture/player_angel.xpm", &map->img_play.width, &map->img_play.height);
 	map->img_esc.img = mlx_xpm_file_to_image(vars->mlx, \
 	"texture/escape_hole.xpm", &map->img_esc.width, &map->img_esc.height);
+	map->img_vil.img = mlx_xpm_file_to_image(vars->mlx, \
+	"texture/villain_jesus.xpm", &map->img_esc.width, &map->img_esc.height);
 	img_to_window_b(map, player, vars);
 	vars->map = map;
 	vars->player = player;

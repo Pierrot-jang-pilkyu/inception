@@ -6,7 +6,7 @@
 /*   By: pjang <student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 01:44:13 by pjang             #+#    #+#             */
-/*   Updated: 2022/10/07 04:59:42 by pjang            ###   ########.fr       */
+/*   Updated: 2022/10/10 15:45:53 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 # include <unistd.h>
+# include <stdio.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <string.h>

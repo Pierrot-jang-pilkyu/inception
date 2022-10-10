@@ -6,78 +6,63 @@
 #    By: pjang <student.42seoul.kr>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/23 03:49:53 by pjang             #+#    #+#              #
-#    Updated: 2022/10/10 17:40:58 by pjang            ###   ########.fr        #
+#    Updated: 2022/10/10 17:39:54 by pjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= so_long
+NAME	= so_long_bonus
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
 
-LIBC	=	-L ./libft/ -lft -L ./mlx/ -lmlx -framework OpenGL -framework AppKit
-MLX		=	mlx/libmlx.a
-LFT		=	libft/libft.a
-SRCS	= 	./src/ft_mlx_img.c \
-			./src/game_clear.c \
-			./src/game_close.c \
-			./src/get_linelen.c \
-			./src/get_map.c \
-			./src/get_player_position.c \
-			./src/inits.c \
-			./src/keypress.c \
-			./src/main.c \
-			./src/map_check.c \
-			./src/map_regen.c \
-			./src/move.c \
-			./src/put_error.c 
+LIBC	=	-L ../libft/ -lft -L ../mlx/ -lmlx -framework OpenGL -framework AppKit
+MLX		=	../mlx/libmlx.a
+LFT		=	../libft/libft.a
+SRCS	= 	ft_mlx_img_bonus.c \
+			game_clear_bonus.c \
+			game_fail_bonus.c \
+			game_close_bonus.c \
+			get_linelen_bonus.c \
+			get_map_bonus.c \
+			get_player_position_bonus.c \
+			inits_bonus.c \
+			keypress_bonus.c \
+			main_bonus.c \
+			map_check_bonus.c \
+			map_regen_bonus.c \
+			move_bonus.c \
+			put_error_bonus.c 
 
 OBJS	= $(SRCS:.c=.o)
 RM		= rm -f
 
-BONUS	= so_long_bonus
-
-ifdef WITH_BONUS
-all : $(MLX) $(LFT) $(BONUS)
-else
 all : $(MLX) $(LFT) $(NAME)
-endif
-
-$(BONUS) :
-	@make -s all -C bonus
-	$(RM) $(NAME)
-	@cp bonus/$@ $(NAME)
 
 $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBC)
 
 $(MLX) : 
-	@make -s -C mlx
+	@make -s -C ../mlx
 	@echo "MLX Success."
 
 $(LFT) :
-	@make -s bonus -C libft
+	@make -s bonus -C ../libft
 	@echo "Libft Success."
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus :
-	@make WITH_BONUS=1 all
-
 clean :
-	@make -s $@ -C mlx
-	@make -s $@ -C libft
-	@make -s $@ -C bonus
+	@make -s $@ -C ../mlx
+	@make -s $@ -C ../libft
 	$(RM) $(OBJS)
 	@echo "Object files removed."
 
 fclean : clean
-	@make -s $@ -C libft
-	@make -s $@ -C mlx
-	@make -s $@ -C bonus
+	@make -s $@ -C ../libft
+	@make -s $@ -C ../mlx
 	$(RM) $(NAME)
 	@echo "Executable file removed."
 
 re : fclean all
 
-.PHONY : all bonus clean fclean re
+.PHONY : all clean fclean re
