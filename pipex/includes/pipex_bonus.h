@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 07:48:31 by pjang             #+#    #+#             */
-/*   Updated: 2022/11/07 17:10:14 by pjang            ###   ########.fr       */
+/*   Updated: 2022/11/05 11:59:12 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 # include "../libft/libft.h"
 // unistd = read, write, wait, pipe, dup, dup2, execve / stdlib = exit
 # include <fcntl.h>				// open
@@ -31,6 +31,7 @@ typedef struct s_red
 	int		re_num;
 	int		out_fd;
 	char	*buf;
+	char	*filename;
 	char	*token;
 	char	**e_token;
 }				t_red;
@@ -76,7 +77,7 @@ void	arg_return_to_original(t_data *data, int idx);
 void	conv_fd(t_data *data, int idx);
 int		get_slash(char *str);
 void	execute(t_data *data, int idx, char **envp);
-void	pipex(t_data *data, int idx, char **envp);
+void	pipex(t_data *data, int idx, char **envp, int status);
 void	fd_closed(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 10:42:12 by pjang             #+#    #+#             */
-/*   Updated: 2022/10/28 14:59:13 by pjang            ###   ########.fr       */
+/*   Updated: 2022/11/07 19:13:10 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,21 @@ void	safety_free(char *str, char **strs)
 	char	**temp;
 
 	if (str)
+	{
 		free(str);
-	str = NULL;
+		str = NULL;
+	}
 	if (strs)
 	{
 		temp = strs;
 		while (*strs != NULL)
-			free(*strs++);
+		{
+			if (*strs)
+				free(*strs);
+			*strs++ = NULL;
+		}
 		strs = temp;
 		free(strs);
+		strs = NULL;
 	}
 }

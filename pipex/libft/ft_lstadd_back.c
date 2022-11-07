@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjang <pjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 13:46:13 by pjang             #+#    #+#             */
-/*   Updated: 2022/04/18 13:46:14 by pjang            ###   ########.fr       */
+/*   Updated: 2022/11/07 18:02:22 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
+	if (new == NULL)
+		return ;
 	while (temp->next)
 		temp = temp->next;
 	temp->next = new;

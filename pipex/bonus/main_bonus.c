@@ -6,11 +6,11 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 10:08:58 by pjang             #+#    #+#             */
-/*   Updated: 2022/10/28 17:59:34 by pjang            ###   ########.fr       */
+/*   Updated: 2022/11/07 21:14:11 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 int	main(int argc, char *argv[], char **envp)
 {
@@ -25,11 +25,9 @@ int	main(int argc, char *argv[], char **envp)
 	{
 		fd = here_doc(&data);
 		close(fd);
-		safety_free(data.file1, NULL);
 		safety_free(data.red_lto->token, NULL);
-		data.file1 = ft_strdup("heredoc");
-		data.red_lto->token = ft_strdup("heredoc");
+		data.red_lto->token = ft_strdup(data.red_hrd->filename);
 	}
-	pipex(&data, 0, envp);
+	pipex(&data, 0, envp, 0);
 	return (EXIT_SUCCESS);
 }

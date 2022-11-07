@@ -6,33 +6,11 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 02:13:08 by pjang             #+#    #+#             */
-/*   Updated: 2022/10/28 14:58:10 by pjang            ###   ########.fr       */
+/*   Updated: 2022/11/07 17:38:25 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-char	**get_error_token(void)
-{
-	char	**res;
-
-	res = (char **)malloc(sizeof(char *) * 14);
-	res[0] = ft_strdup("<");
-	res[1] = ft_strdup("<<");
-	res[2] = ft_strdup(">");
-	res[3] = ft_strdup(">>");
-	res[4] = ft_strdup("|");
-	res[5] = ft_strdup("&");
-	res[6] = ft_strdup(";");
-	res[7] = ft_strdup("(");
-	res[8] = ft_strdup(")");
-	res[9] = ft_strdup("\n");
-	res[10] = ft_strdup("#");
-	res[11] = ft_strdup("`");
-	res[12] = ft_strdup("*");
-	res[13] = NULL;
-	return (res);
-}
 
 void	init_red(t_red *red)
 {
@@ -65,37 +43,56 @@ void	get_path(t_data *data, char **envp)
 	safety_free(strs, NULL);
 }
 
-void	init_fd(int argc, t_data *data)
+void	init_fd(t_data *data)
 {
 	int	i;
 
-	data->fd = (int **)malloc(sizeof(int *) * (argc - 1));
+	data->fd = (int **)malloc(sizeof(int *) * (data->pipe_size + 1));
+	if (!data->fd)
+		put_error("bash: data->fd: memory assign error", NULL);
 	i = -1;
-	while (++i < argc - 1)
+	while (++i < data->pipe_size)
 	{
 		data->fd[i] = (int *)malloc(sizeof(int) * 2);
+		if (!data->fd[i])
+			put_error("bash: *data->fd: memory assign error", NULL);
 		data->fd[i][0] = -2;
 		data->fd[i][1] = -2;
 	}
 	data->fd[i] = NULL;
 }
 
+void	init_data_dalloc(t_data *data)
+{
+	data->pid = (pid_t *)malloc(sizeof(pid_t) * (data->pipe_size + 1));
+	if (!data->pid)
+		put_error("bash: data->pid: memory assign error", NULL);
+	data->pid[data->pipe_size] = -1;
+	data->red_lto = (t_red *)malloc(sizeof(t_red) * 1);
+	if (!data->red_lto)
+		put_error("bash: data->red_lto: memory assign error", NULL);
+	data->red_hrd = (t_red *)malloc(sizeof(t_red) * 1);
+	if (!data->red_hrd)
+		put_error("bash: data->red_hrd: memory assign error", NULL);
+	data->red_mto = (t_red *)malloc(sizeof(t_red) * 1);
+	if (!data->red_mto)
+		put_error("bash: data->red_mto: memory assign error", NULL);
+	data->red_dmto = (t_red *)malloc(sizeof(t_red) * 1);
+	if (!data->red_dmto)
+		put_error("bash: data->red_dmto: memory assign error", NULL);
+}
+
 void	init(int argc, t_data *data, char **envp)
 {
-	init_fd(argc, data);
 	data->pipe_size = argc - 3 - 1;
-	data->pid = (pid_t *)malloc(sizeof(pid_t) * (data->pipe_size + 1));
-	data->pid[data->pipe_size] = -1;
+	init_fd(data);
 	data->file1 = NULL;
 	data->cmds = NULL;
 	data->file2 = NULL;
 	data->arg = NULL;
 	data->paths = NULL;
 	get_path(data, envp);
-	data->red_lto = (t_red *)malloc(sizeof(t_red) * 1);
-	data->red_hrd = (t_red *)malloc(sizeof(t_red) * 1);
-	data->red_mto = (t_red *)malloc(sizeof(t_red) * 1);
-	data->red_dmto = (t_red *)malloc(sizeof(t_red) * 1);
+	init_data_dalloc(data);
 	init_red(data->red_lto);
 	init_red(data->red_hrd);
 	init_red(data->red_mto);

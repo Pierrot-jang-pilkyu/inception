@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
+/*   here_doc_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 05:11:22 by pjang             #+#    #+#             */
-/*   Updated: 2022/10/28 14:55:51 by pjang            ###   ########.fr       */
+/*   Updated: 2022/11/01 21:57:47 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 void	read_gnl(t_red *red, int fd)
 {
@@ -36,7 +36,11 @@ int	here_doc(t_data *data)
 
 	red = data->red_hrd;
 	valid_token(red);
-	fd = open("heredoc", O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (ft_memcmp(data->file2, "heredoc", 8) == 0)
+		red->filename = ft_strdup("here_doc");
+	else
+		red->filename = ft_strdup("heredoc");
+	fd = open(red->filename, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 		put_error(NULL, "heredoc");
 	read_gnl(red, fd);

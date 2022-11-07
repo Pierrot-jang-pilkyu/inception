@@ -6,7 +6,7 @@
 #    By: pjang <pjang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/23 03:49:53 by pjang             #+#    #+#              #
-#    Updated: 2022/10/28 17:53:26 by pjang            ###   ########.fr        #
+#    Updated: 2022/11/07 21:23:02 by pjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LFT		=	libft/libft.a
 SRCS	= 	./srcs/execute.c \
 			./srcs/arg_devide.c \
 			./srcs/init.c \
+			./srcs/init_2.c \
 			./srcs/main.c \
 			./srcs/parsing.c \
 			./srcs/pipex.c \
@@ -31,6 +32,7 @@ B_SRCS	= 	./bonus/execute_bonus.c \
 			./bonus/arg_devide_bonus.c \
 			./bonus/here_doc_bonus.c \
 			./bonus/init_bonus.c \
+			./bonus/init_2_bonus.c \
 			./bonus/main_bonus.c \
 			./bonus/parsing_bonus.c \
 			./bonus/pipex_bonus.c \

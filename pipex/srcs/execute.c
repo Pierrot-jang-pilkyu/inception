@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 04:06:34 by pjang             #+#    #+#             */
-/*   Updated: 2022/10/28 17:01:49 by pjang            ###   ########.fr       */
+/*   Updated: 2022/11/07 20:43:57 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,53 @@ void	conv_fd(t_data *data, int idx)
 	fd_closed(data);
 }
 
-void	execute(t_data *data, int idx, char **envp)
+char	*getpath(t_data *data)
 {
+	int		flag;
 	char	*path;
 	char	*p_temp;
 	char	**temp;
 
-	conv_fd(data, idx);
+	flag = 0;
 	temp = data->paths;
+	path = NULL;
 	while (*temp != NULL)
 	{
+		safety_free(path, NULL);
 		p_temp = ft_strjoin(*temp, "/");
 		path = ft_strjoin(p_temp, data->arg[0]);
+		if (!p_temp || !path)
+			put_error("bash : getpath: malloc assign error", NULL);
 		safety_free(p_temp, NULL);
-		execve(path, data->arg, envp);
-		safety_free(path, NULL);
+		if (!access(path, F_OK))
+		{
+			flag = 1;
+			break ;
+		}
 		temp++;
 	}
-	put_error(NULL, data->arg[0]);
+	return (path);
+}
+
+void	execute(t_data *data, int idx, char **envp)
+{
+	char	*path;
+
+	conv_fd(data, idx);
+	if (!data->arg[0])
+		put_error("bash: data->arg[0]: null pointer", NULL);
+	path = getpath(data);
+	if (!path)
+		put_error("bash: getpath in exec: malloc assign error", NULL);
+	execve(path, (char *const *)data->arg, envp);
+	safety_free(path, NULL);
+	if (*data->cmds[idx] == '/')
+		put_error(NULL, data->arg[0]);
+	else
+	{
+		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd(data->arg[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
+		exit(127);
+	}
 }

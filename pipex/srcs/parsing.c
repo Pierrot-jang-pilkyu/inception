@@ -6,7 +6,7 @@
 /*   By: pjang <pjang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 09:37:57 by pjang             #+#    #+#             */
-/*   Updated: 2022/10/28 14:26:02 by pjang            ###   ########.fr       */
+/*   Updated: 2022/11/07 19:10:21 by pjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	update_data(int *i, int ac, char *const av[], t_data *data)
 		data->pipe_size--;
 		data->file1 = ft_strdup(av[2]);
 		data->cmds = (char **)malloc(sizeof(char *) * (ac - 4 + 1));
+		if (!data->cmds)
+			put_error("bash: data->cmds: malloc assign error", NULL);
 		*i = 2;
 	}
 	else
@@ -45,6 +47,8 @@ void	update_data(int *i, int ac, char *const av[], t_data *data)
 		data->red[1] = MTO;
 		data->file1 = ft_strdup(av[1]);
 		data->cmds = (char **)malloc(sizeof(char *) * (ac - 3 + 1));
+		if (!data->cmds)
+			put_error("bash: data->cmds: malloc assign error", NULL);
 		*i = 1;
 	}
 }
