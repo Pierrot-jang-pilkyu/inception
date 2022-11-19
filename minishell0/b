@@ -1,0 +1,13 @@
+total 128
+drwxr-xr-x  12 pjang  2022_seoul    408 Nov 19 13:39 .
+drwxr-xr-x  22 pjang  2022_seoul    748 Nov 14 09:44 ..
+drwxr-xr-x   3 pjang  2022_seoul    102 Nov 12 14:08 .vscode
+-rw-r--r--   1 pjang  2022_seoul   2466 Nov 19 04:51 Makefile
+-rw-r--r--   1 pjang  2022_seoul     10 Nov 19 13:39 a
+drwxr-xr-x   3 pjang  2022_seoul    102 Nov 14 15:06 a.out.dSYM
+-rw-r--r--   1 pjang  2022_seoul      0 Nov 19 13:39 b
+drwxr-xr-x   3 pjang  2022_seoul    102 Nov 14 12:34 includes
+drwxr-xr-x  59 pjang  2022_seoul   2006 Nov 19 04:47 libft
+-rwxr-xr-x   1 pjang  2022_seoul  56792 Nov 19 05:56 minishell
+drwxr-xr-x   6 pjang  2022_seoul    204 Nov 19 08:58 srcs
+drwxr-xr-x   5 pjang  2022_seoul    170 Nov 14 13:23 test
