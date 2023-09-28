@@ -1,0 +1,70 @@
+version: '3.9'
+
+volumes:
+    wordpress_data:
+        driver: local
+        driver_opts:
+            type: volume
+            o: bind
+            device: /home/vboxuser/data/wordpress_data
+    mariadb_data:
+        driver: local
+        driver_opts:
+            type: volume
+            o: bind
+            device: /home/vboxuser/data/mariadb_data
+
+services:
+    mariadb:
+        env_file:
+            - ./.env
+        container_name: mariadb
+        build:
+            context: ./requirements/mariadb
+            dockerfile: Dockerfile
+        expose:
+            - "3306"
+        networks:
+            - inception
+        tty: true
+        volumes:
+            - mariadb_data:/var/lib/mysql
+        restart: always
+
+    wordpress:
+        depends_on:
+            - mariadb
+        env_file:
+            - ./.env
+        container_name: wordpress
+        build:
+            context: ./requirements/wordpress
+            dockerfile: Dockerfile
+        expose:
+            - "9000"
+        networks:
+            - inception
+        tty: true
+        volumes:
+            - wordpress_data:/var/www/html
+        restart: always
+
+    nginx:
+        depends_on:
+            - wordpress
+        container_name: nginx
+        build:
+            context: ./requirements/nginx
+            dockerfile: Dockerfile
+        ports:
+            - "443:443"
+        networks:
+            - inception
+        tty: true
+        volumes:
+            - wordpress_data:/var/www/html
+        restart: always
+
+networks:
+    inception:
+        driver: bridge
