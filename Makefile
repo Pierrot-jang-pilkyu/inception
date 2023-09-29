@@ -8,7 +8,8 @@ ps:
 	$(DC) ps
 
 up: 
-	bash $(SRCS)/requirements/tools/make_dir.sh
+	bash $(SRCS)/requirements/tools/docker.sh
+	bash $(SRCS)/requirements/tools/mkdir.sh
 	$(DC) up --build
 
 down: 
