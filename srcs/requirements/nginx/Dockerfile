@@ -17,10 +17,10 @@ COPY ./conf/default /etc/nginx/sites-available/default
 COPY ./tools/hosts /
 
 COPY ./tools/setup.sh setup.sh
-RUN [ "bash", "setup.sh" ]
 
 
 # nginx 서비스 시작
 
-# ENTRYPOINT [ "bash", "setup.sh" ]
-ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+ENTRYPOINT [ "bash", "setup.sh" ]
+# ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+CMD [ "nginx", "-g", "daemon off;" ]
