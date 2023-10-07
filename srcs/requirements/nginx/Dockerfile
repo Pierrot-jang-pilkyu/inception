@@ -16,11 +16,11 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 COPY ./conf/default /etc/nginx/sites-available/default
 COPY ./tools/hosts /
 
-RUN /bin/sh -c cat /hosts > /etc/hosts &&\
-    rm -rf /hosts
+COPY ./tools/setup.sh setup.sh
+RUN [ "bash", "setup.sh" ]
+
 
 # nginx 서비스 시작
 
-# COPY ./tools/setup.sh setup.sh
 # ENTRYPOINT [ "bash", "setup.sh" ]
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
