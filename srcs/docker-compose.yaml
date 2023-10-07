@@ -6,13 +6,13 @@ volumes:
         driver_opts:
             type: volume
             o: bind
-            device: /home/vboxuser/data/wordpress_data
+            device: /home/$USER/data/wordpress_data
     mariadb_data:
         driver: local
         driver_opts:
             type: volume
             o: bind
-            device: /home/vboxuser/data/mariadb_data
+            device: /home/$USER/data/mariadb_data
 
 services:
     mariadb:

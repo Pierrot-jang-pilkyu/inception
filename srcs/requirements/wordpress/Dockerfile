@@ -21,6 +21,7 @@ RUN apt-get update -y && \
 
 # www.conf 설정
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY ./tools/hosts /
 
 # wp-cli 설치
 RUN curl -O \
@@ -30,5 +31,5 @@ RUN curl -O \
     ln -sf /usr/local/bin/wp-cli.phar /usr/local/bin/wp
 
 # wp-config 설정 및 php-fpm 서비스 시작
-COPY /tools/setup.sh setup.sh
+COPY ./tools/setup.sh setup.sh
 ENTRYPOINT [ "bash", "setup.sh" ]

@@ -8,7 +8,6 @@ ps:
 	$(DC) ps
 
 up: 
-	bash $(SRCS)/requirements/tools/docker.sh
 	bash $(SRCS)/requirements/tools/mkdir.sh
 	$(DC) up --build
 
@@ -28,5 +27,7 @@ clean:
 fclean:
 	$(MAKE) clean
 	docker system prune -a
+
+re: fclean all
 		
-.PHONY = all up down start stop clean fclean
+.PHONY = all up down start stop clean fclean re

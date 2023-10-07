@@ -29,4 +29,9 @@ if ! wp core is-installed --allow-root --path=/var/www/html; then
                 --path=/var/www/html
 fi
 
-service php7.3-fpm start | php-fpm7.3 -F
+cat /hosts > /etc/hosts
+rm -rf /hosts
+
+service php7.3-fpm start
+service php7.3-fpm stop
+php-fpm7.3 -F
