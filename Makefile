@@ -1,5 +1,5 @@
 SRCS = ./srcs
-CF = $(SRCS)/docker-compose.yaml
+CF = $(SRCS)/docker-compose.yml
 DC = docker compose -f $(CF)
 
 all: up

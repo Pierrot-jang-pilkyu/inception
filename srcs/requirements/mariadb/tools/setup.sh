@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-
 service mysql start
 
 mysql -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;"
@@ -16,5 +14,5 @@ fi
 mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '"$MYSQL_ROOT_PASSWORD"';"
 mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
 mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD shutdown
-
-exec "$@"
+# mysqld --bind-address=0.0.0.0
+mysqld_safe
