@@ -14,13 +14,12 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 
 # default 설정
 COPY ./conf/default /etc/nginx/sites-available/default
-COPY ./tools/hosts /
 
 COPY ./tools/setup.sh setup.sh
 
 
 # nginx 서비스 시작
 
-ENTRYPOINT [ "bash", "setup.sh" ]
-# ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
-CMD [ "nginx", "-g", "daemon off;" ]
+# ENTRYPOINT [ "bash", "setup.sh" ]
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+# CMD [ "nginx", "-g", "daemon off;" ]

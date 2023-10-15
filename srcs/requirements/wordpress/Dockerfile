@@ -21,7 +21,6 @@ RUN apt-get update -y && \
 
 # www.conf 설정
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
-COPY ./tools/hosts /
 
 # wp-cli 설치
 RUN curl -O \

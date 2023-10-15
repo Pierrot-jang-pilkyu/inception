@@ -1,4 +1,4 @@
 #!/bin/sh
 
-mkdir -p /home/vboxuser/data/mariadb_data
-mkdir -p /home/vboxuser/data/wordpress_data
+mkdir -p /home/$USER/data/mariadb_data
+mkdir -p /home/$USER/data/wordpress_data
