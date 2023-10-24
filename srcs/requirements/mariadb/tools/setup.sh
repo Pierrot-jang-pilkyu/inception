@@ -1,6 +1,6 @@
 #!/bin/sh
 
-service mysql start
+/etc/init.d/mariadb start
 
 mysql -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;"
 QUERY=$(echo $(mysql -e "select count(mysql.user.user) from mysql.user where mysql.user.user= 'pjang'"));

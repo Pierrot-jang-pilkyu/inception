@@ -8,7 +8,7 @@ VOLUME [ "/var/www/html" ]
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get -y install \
-    php7.3 \
+    php7.4 \
     php-fpm \
     php-cli \
     wget \
