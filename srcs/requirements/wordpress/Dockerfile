@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 EXPOSE 9000
 
 RUN mkdir -p /var/www/html
