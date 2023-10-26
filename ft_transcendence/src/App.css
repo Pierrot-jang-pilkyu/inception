@@ -1,0 +1,149 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  /* max-width: 1920px; */
+  /* aspect-ratio: 1920 / 1080; */
+  background: #285ADA;
+}
+
+.container-home {
+  display: flex;
+  flex-direction: row;                      /* 아이템들이 행(가로) 방향으로 배치됩니다. */
+  /* flex-direction: column;                아이템들이 역순으로 가로 배치됩니다. */
+	/* flex-direction: row-reverse;           아이템들이 열(세로) 방향으로 배치됩니다. */
+	/* flex-direction: column-reverse;        아이템들이 역순으로 세로 배치 됩니다. */
+  /* flex-wrap: nowrap;                     줄바꿈을 하지 않습니다. 넘치면 그냥 삐져 나가요. */
+	/* flex-wrap: wrap;                       줄바꿈을 합니다. float이나 inline-block으로 배치한 요소들과 비슷하게 동작해요. */
+	flex-wrap: wrap-reverse;                  /* 줄바꿈을 하는데, 아이템을 역순으로 배치해요. 그림을 보면 이해하실 수 있을 거예요. */
+  gap: 20px;
+  column-gap: 56px;
+  position: absolute;
+  top: 72%;
+  right: 61%;
+  bottom: 22%;
+  left: 22%;
+}
+
+.home-typography {
+  color: #FFF;
+  text-align: center;
+  font-family: 'Anton', sans-serif;
+  /* font-size: 3vh; */
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.btn {
+  position: relative;
+  border-radius: 8px;
+}
+
+.btn-home {
+  position: relative;
+  border-radius: 8px;
+  border: 3px solid #FFF;
+  background: #285ADA;
+}
+
+a[class*="btn"] {
+  text-decoration: none;
+  color: white;
+}
+
+.btn-home.typography {
+  color: #FFF;
+  text-align: center;
+  font-family: 'Anton', sans-serif;
+  /* font-size: 3vh; */
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.btn-home.login_layout {
+  /* width: 17vw;
+  height: 6vh; */
+  width: 17vw;
+  min-width: 76px;
+  max-width: 340px;
+  height: 6vh;
+  min-height: 42px;
+  max-height: 64px;
+  flex-shrink: 0;
+  /* top: 72%;
+  right: 61%;
+  bottom: 22%;
+  left: 22%; */
+}
+
+.btn-home.signup_layout {
+  width: 11vw;
+  min-width: 84px;
+  max-width: 220px;
+  height: 6vh;
+  min-height: 42px;
+  max-height: 64px;
+  flex-shrink: 0;
+  /* top: 72%;
+  right: 49%;
+  bottom: 22%;
+  left: 40%; */
+}
+
+.btn-profile {
+  border: 2px solid #FFF;
+  background: rgba(255, 255, 255, 0.20);
+}
+
+.btn-popupNo {
+  border: 1px solid #7B7B7B;
+  background: #FFF;
+}
+
+.btn-popupYes {
+  background: #285ADA;
+}
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
